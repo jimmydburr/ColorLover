@@ -1,15 +1,17 @@
 ﻿open FSharp.Data
-
-//type Palette = XmlProvider<"http://www.colourlovers.com/api/palettes">
-//let myPalette = Palette.GetSample()
-//printfn "%A \n" (myPalette)
-//for item in myPalette.Palettes do
-//  printfn " - %s (%s)" (item.Id.ToString()) (item.BadgeUrl.ToString())
+open FSharp.Data.HttpRequestHeaders
 
 let apiUrlForPalettes = "http://www.colourlovers.com/api/palettes?format=json"
 type Palette = JsonProvider<"http://www.colourlovers.com/api/palette/92095?format=json">
 
 let myPalette = Palette.Load(apiUrlForPalettes)
-printfn "%A\n%A\n%A " myPalette.[0].BadgeUrl myPalette.[0].Url myPalette.[0].Title
+//printfn "%A\n%A\n%A\n\n" myPalette.[0].BadgeUrl myPalette.[0].Url myPalette.[0].Title
+printfn "%A\n\n" myPalette.[0]
 
+Http.RequestString(
+    "http://httpbin.org/post", 
+    headers = [ ContentType HttpContentTypes.Json ],
+    body = TextRequest """ {"test": 42} """
+) |> printfn "%A"
+    
 let pause = System.Console.ReadKey()
