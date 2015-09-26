@@ -1,11 +1,19 @@
 ﻿open FSharp.Data
 open FSharp.Data.HttpRequestHeaders
+open System
+open System.Drawing
 
-type Palette = JsonProvider<"http://www.colourlovers.com/api/palette/92095?format=json">
-let apiUrlForPalettes = "http://www.colourlovers.com/api/palettes/random?format=json"
+type Palette = JsonProvider<"http://www.colourlovers.com/api/palette/92095?format=json&showPaletteWidths=1">
+let apiUrlForPalettes = "http://www.colourlovers.com/api/palettes/random?format=json&showPaletteWidths=1"
 
 let myPalette = Palette.Load(apiUrlForPalettes)
-//printfn "%A\n\n" myPalette.[0]
+printfn "%A\n\n" myPalette
+let paletteColors = myPalette.[0].Colors  |> Array.map (fun x -> "#" + x) |> Array.map ColorTranslator.FromHtml
+let colorBrushes = paletteColors |> Array.map (fun x -> new SolidBrush(x))
+let colorWidths = myPalette.[0].ColorWidths |> Array.map (fun x -> 400.0M * x)
+printfn "%A\n\n" colorWidths
+let r = System.Console.ReadKey()
+exit 0
 
 let myTextRequest = "{
     \"username\" : \"" + myPalette.[0].Title + "\",
