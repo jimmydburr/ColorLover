@@ -10,7 +10,7 @@ let myPalette = Palette.Load(apiUrlForPalettes)
 printfn "%A\n\n" myPalette
 let paletteColors = myPalette.[0].Colors  |> Array.map (fun x -> "#" + x) |> Array.map ColorTranslator.FromHtml
 let colorBrushes = paletteColors |> Array.map (fun x -> new SolidBrush(x))
-let colorWidths = myPalette.[0].ColorWidths |> Array.map (fun x -> 400.0M * x)
+let colorWidths = myPalette.[0].ColorWidths |> Array.map (fun x -> 400.0M * x) |> Array.map int
 printfn "%A\n\n" colorWidths
 let r = System.Console.ReadKey()
 exit 0
