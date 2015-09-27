@@ -13,7 +13,7 @@ let colorBrushes = paletteColors |> Array.map (fun x -> new SolidBrush(x))
 let colorWidths = myPalette.[0].ColorWidths |> Array.map (fun x -> 400.0M * x) |> Array.map int
 let colorXStarts : int array = Array.zeroCreate 5 
 colorXStarts.[0] <- 0
-for i in 1..colorWidths.Length do
+for i in 1..colorWidths.Length - 1 do
     colorXStarts.[i] <- colorXStarts.[i-1] + colorWidths.[i-1]
 
 //printfn "%A\n\n" colorXStarts
@@ -22,7 +22,7 @@ let flagGraphics = Graphics.FromImage(flag);
 let height = 50
 let colorY = 0
 
-for i in 1 .. colorXStarts.Length do
+for i in 1 .. colorXStarts.Length - 1 do
     flagGraphics.FillRectangle(colorBrushes.[i], colorXStarts.[i], colorY, colorWidths.[i], height)
 
 flag.Save("flag.png", System.Drawing.Imaging.ImageFormat.Png)
