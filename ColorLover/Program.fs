@@ -25,7 +25,7 @@ let colorY = 0
 for i in 0 .. colorXStarts.Length - 1 do
     flagGraphics.FillRectangle(colorBrushes.[i], colorXStarts.[i], colorY, colorWidths.[i], height)
 
-let flagName = "flag" + DateTime.Now.ToString("fffffff") + ".png"
+let flagName = "/var/www/concoctedlogic/palettes/flag" + DateTime.Now.ToString("fffffff") + ".png"
 printfn "%s\n" flagName
 flag.Save(flagName, System.Drawing.Imaging.ImageFormat.Png)
 
@@ -38,7 +38,7 @@ let myTextRequest = "{
         {
             \"fallback\": \"The palette attachment.\",
             \"color\": \"#36a64f\",
-            \"image_url\": \"https://koanoknksl.localtunnel.me/" + flagName + "\"
+            \"image_url\": \"http://concoctedlogic.com/palettes/" + flagName + "\"
         }
     ]
 }"
