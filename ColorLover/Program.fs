@@ -22,20 +22,29 @@ let flagGraphics = Graphics.FromImage(flag);
 let height = 50
 let colorY = 0
 
-for i in 1 .. colorXStarts.Length - 1 do
+for i in 0 .. colorXStarts.Length - 1 do
     flagGraphics.FillRectangle(colorBrushes.[i], colorXStarts.[i], colorY, colorWidths.[i], height)
 
 flag.Save("flag.png", System.Drawing.Imaging.ImageFormat.Png)
 
+let myTextRequest = "{  
+    \"channel\" : \"@jim\",
+    \"username\" : \"" + myPalette.[0].Title + "\",
+    \"icon_url\" : \"" + myPalette.[0].ImageUrl + "\",
+    \"text\" : \"<" + myPalette.[0].Url + ">\",
+    \"attachments\": [
+        {
+            \"fallback\": \"The palette attachment.\",
+            \"color\": \"#36a64f\",
+            \"image_url\": \"http://localhost/path/to/flag.png\"
+        }
+    ]
+}"
+printfn "%s\n" myTextRequest
+
 let r = System.Console.ReadKey()
 exit 0
 
-let myTextRequest = "{
-    \"username\" : \"" + myPalette.[0].Title + "\",
-    \"icon_url\" : \"" + myPalette.[0].ImageUrl + "\",
-    \"text\" : \"<" + myPalette.[0].Url + ">\"
-}"
-printfn "%s\n" myTextRequest
 // hightower slack #creative channel
 Http.RequestString(
     "https://hooks.slack.com/services/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",
