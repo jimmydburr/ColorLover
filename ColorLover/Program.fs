@@ -11,7 +11,7 @@ printfn "%A\n\n" myPalette
 let paletteColors = myPalette.[0].Colors  |> Array.map (fun x -> "#" + x) |> Array.map ColorTranslator.FromHtml
 let colorBrushes = paletteColors |> Array.map (fun x -> new SolidBrush(x))
 let colorWidths = myPalette.[0].ColorWidths |> Array.map (fun x -> 400.0M * x) |> Array.map int
-let colorXStarts : int array = Array.zeroCreate 5 
+let colorXStarts : int array = Array.zeroCreate 5
 colorXStarts.[0] <- 0
 for i in 1..colorWidths.Length - 1 do
     colorXStarts.[i] <- colorXStarts.[i-1] + colorWidths.[i-1]
@@ -27,7 +27,7 @@ for i in 0 .. colorXStarts.Length - 1 do
 
 flag.Save("flag.png", System.Drawing.Imaging.ImageFormat.Png)
 
-let myTextRequest = "{  
+let myTextRequest = "{
     \"channel\" : \"@jim\",
     \"username\" : \"" + myPalette.[0].Title + "\",
     \"icon_url\" : \"" + myPalette.[0].ImageUrl + "\",
@@ -36,14 +36,14 @@ let myTextRequest = "{
         {
             \"fallback\": \"The palette attachment.\",
             \"color\": \"#36a64f\",
-            \"image_url\": \"http://localhost/path/to/flag.png\"
+            \"image_url\": \"https://koanoknksl.localtunnel.me/flag.png\"
         }
     ]
 }"
 printfn "%s\n" myTextRequest
 
-let r = System.Console.ReadKey()
-exit 0
+//let r = System.Console.ReadKey()
+//exit 0
 
 // hightower slack #creative channel
 Http.RequestString(
