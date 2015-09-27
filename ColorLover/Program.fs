@@ -11,7 +11,22 @@ printfn "%A\n\n" myPalette
 let paletteColors = myPalette.[0].Colors  |> Array.map (fun x -> "#" + x) |> Array.map ColorTranslator.FromHtml
 let colorBrushes = paletteColors |> Array.map (fun x -> new SolidBrush(x))
 let colorWidths = myPalette.[0].ColorWidths |> Array.map (fun x -> 400.0M * x) |> Array.map int
-printfn "%A\n\n" colorWidths
+let colorXStarts : int array = Array.zeroCreate 5 
+colorXStarts.[0] <- 0
+for i in 1..colorWidths.Length do
+    colorXStarts.[i] <- colorXStarts.[i-1] + colorWidths.[i-1]
+
+//printfn "%A\n\n" colorXStarts
+let flag = new Bitmap(400, 50);
+let flagGraphics = Graphics.FromImage(flag);
+let height = 50
+let colorY = 0
+
+for i in 1 .. colorXStarts.Length do
+    flagGraphics.FillRectangle(colorBrushes.[i], colorXStarts.[i], colorY, colorWidths.[i], height)
+
+flag.Save("flag.png", System.Drawing.Imaging.ImageFormat.Png)
+
 let r = System.Console.ReadKey()
 exit 0
 
