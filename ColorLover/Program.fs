@@ -25,12 +25,11 @@ let colorY = 0
 for i in 0 .. colorXStarts.Length - 1 do
     flagGraphics.FillRectangle(colorBrushes.[i], colorXStarts.[i], colorY, colorWidths.[i], height)
 
-let flagName = "/var/www/concoctedlogic/palettes/flag" + DateTime.Now.ToString("fffffff") + ".png"
+let flagName = "flag" + DateTime.Now.ToString("fffffff") + ".png"
 printfn "%s\n" flagName
-flag.Save(flagName, System.Drawing.Imaging.ImageFormat.Png)
+flag.Save("/var/www/concoctedlogic/palettes/" + flagName, System.Drawing.Imaging.ImageFormat.Png)
 
 let myTextRequest = "{
-    \"channel\" : \"@jim\",
     \"username\" : \"" + myPalette.[0].Title + "\",
     \"icon_url\" : \"" + myPalette.[0].ImageUrl + "\",
     \"text\" : \"<" + myPalette.[0].Url + ">\",
