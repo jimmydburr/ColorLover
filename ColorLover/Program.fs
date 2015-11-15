@@ -30,7 +30,6 @@ let flagName = "flag" + DateTime.Now.ToString("fffffff") + ".png"
 flag.Save("/var/www/concoctedlogic/palettes/" + flagName, System.Drawing.Imaging.ImageFormat.Png)
 
 let myTextRequest = "{
-    \"channel\" : \"@jim\",
     \"username\" : \"" + myPalette.[0].Title + "\",
     \"icon_url\" : \"" + myPalette.[0].ImageUrl + "\",
     \"text\" : \"<" + myPalette.[0].Url + ">\",
@@ -42,7 +41,7 @@ let myTextRequest = "{
         }
     ]
 }"
-printfn "%s\n" myTextRequest
+//printfn "%s\n" myTextRequest
 
 //let r = System.Console.ReadKey()
 //exit 0
@@ -52,4 +51,4 @@ Http.RequestString(
     "https://hooks.slack.com/services/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",
     headers = [ ContentType HttpContentTypes.Json ],
     body = TextRequest myTextRequest
-) |> printfn "%A"
+) |> ignore //printfn "%A"
