@@ -1,4 +1,4 @@
-﻿open FSharp.Data
+open FSharp.Data
 open FSharp.Data.HttpRequestHeaders
 open System
 open System.Drawing
@@ -7,7 +7,7 @@ type Palette = JsonProvider<"http://www.colourlovers.com/api/palette/92095?forma
 let apiUrlForPalettes = "http://www.colourlovers.com/api/palettes/random?format=json&showPaletteWidths=1"
 
 let myPalette = Palette.Load(apiUrlForPalettes)
-printfn "%A\n\n" myPalette
+//printfn "%A\n\n" myPalette
 let paletteColors = myPalette.[0].Colors  |> Array.map (fun x -> "#" + x) |> Array.map ColorTranslator.FromHtml
 let colorBrushes = paletteColors |> Array.map (fun x -> new SolidBrush(x))
 let colorWidths = myPalette.[0].ColorWidths |> Array.map (fun x -> 400.0M * x) |> Array.map int
@@ -26,10 +26,11 @@ for i in 0 .. colorXStarts.Length - 1 do
     flagGraphics.FillRectangle(colorBrushes.[i], colorXStarts.[i], colorY, colorWidths.[i], height)
 
 let flagName = "flag" + DateTime.Now.ToString("fffffff") + ".png"
-printfn "%s\n" flagName
+//printfn "%s\n" flagName
 flag.Save("/var/www/concoctedlogic/palettes/" + flagName, System.Drawing.Imaging.ImageFormat.Png)
 
 let myTextRequest = "{
+    \"channel\" : \"@jim\",
     \"username\" : \"" + myPalette.[0].Title + "\",
     \"icon_url\" : \"" + myPalette.[0].ImageUrl + "\",
     \"text\" : \"<" + myPalette.[0].Url + ">\",
