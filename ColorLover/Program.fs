@@ -46,9 +46,9 @@ let myTextRequest = "{
 //let r = System.Console.ReadKey()
 //exit 0
 
-// hightower slack #creative channel
+let slackHookURL = "http:// your slack hook URL"
 Http.RequestString(
-    "https://hooks.slack.com/services/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",
+    slackHookURL,
     headers = [ ContentType HttpContentTypes.Json ],
     body = TextRequest myTextRequest
 ) |> ignore //printfn "%A"
