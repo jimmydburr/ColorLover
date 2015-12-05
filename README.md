@@ -13,6 +13,7 @@ The code is written in F# and runs on Mac, Linux, and Windows. Essentially, the 
 * posts to the slack web-hook
 
 The resulting .exe is a console application and can be run directly from the command line.
+
     > ColorLover.exe // on windows
     $ mono ColorLover.exe  // on unix
 
